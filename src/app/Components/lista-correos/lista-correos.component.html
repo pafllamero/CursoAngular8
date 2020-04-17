@@ -5,17 +5,22 @@
         <th>Titulo</th>
         <th>Responder</th>
     </tr>
-    <tr *ngFor="let correo of correos; index as i;">
-        <td>
-            <input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=true disabled> Si
-            <input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=false disabled> No
-        </td>
-        <td>{{correo.emisor}}</td>
-        <td>{{correo.titulo}}</td>
-        <td>
-            <button (click)="clickResponder(correo)">Responder</button>
-        </td>
-    </tr>
+    <ng-container *ngFor="let correo of correos; index as i;">
+        <!-- ng-container es un componente de angular que, según el profesor,
+        incluye código html en la página sin modificar el DOM. ¿Cómo
+    funciona? ¿Cómo se usa? Pues te miras la documentación (profe dixit)-->
+        <tr>
+            <td>
+                <input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=true disabled> Si
+                <input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=false disabled> No
+            </td>
+            <td>{{correo.emisor}}</td>
+            <td>{{correo.titulo}}</td>
+            <td>
+                <button (click)="clickResponder(correo)">Responder</button>
+            </td>
+        </tr>
+    </ng-container>
 </table>
 
 <!-- Primero, realizaremos una prueba fuera -->
