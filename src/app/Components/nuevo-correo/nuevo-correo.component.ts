@@ -10,7 +10,7 @@ export class NuevoCorreoComponent implements OnInit {
 
   nuevoCorreo: FormGroup;
   submitted = false;
-  @Input() correo: any;
+  @Input() correo: any; // Decorador para recibir el correo a responder desde lista-correos
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -20,7 +20,15 @@ export class NuevoCorreoComponent implements OnInit {
       cuerpo: ['', [Validators.required, Validators.minLength(10)]],
       destinatario: ['', [Validators.required, Validators.email]],
     });
-    console.log(this.correo);
+
+    if (this.correo !== undefined) {
+      console.log('A', this.correo);
+      this.nuevoCorreo.patchValue({
+        titulo: 'Re:' + this.correo.titulo,
+        destinatario: this.correo.emisor
+      });
+    }
+    // console.log(this.correo);
   }
 
   get formulario() { return this.nuevoCorreo.controls; }
@@ -36,7 +44,7 @@ export class NuevoCorreoComponent implements OnInit {
     correo.leido = false;
     correo.emisor = 'correoEmisor1@openWebinar.inv';
 
-    alert("Correo Enviado \nEliminamos el formulario");
+    alert('Correo Enviado \nEliminamos el formulario');
     this.onReset();
   }
 
