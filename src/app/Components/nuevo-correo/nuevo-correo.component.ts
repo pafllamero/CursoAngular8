@@ -22,10 +22,10 @@ export class NuevoCorreoComponent implements OnInit {
       cuerpo: ['', [Validators.required, Validators.minLength(10)]],
       destinatario: ['', [Validators.required, Validators.email]],
     });
-    
-    if(this.correo != undefined){
+
+    if (this.correo !== undefined) {
       this.nuevoCorreo.patchValue({
-        titulo: 'Re: '+ this.correo.titulo, 
+        titulo: 'Re: ' + this.correo.titulo,
         destinatario: this.correo.emisor
       });
     }
@@ -40,12 +40,12 @@ export class NuevoCorreoComponent implements OnInit {
       return;
     }
 
-    let correo = this.nuevoCorreo.value;
+    const correo = this.nuevoCorreo.value;
     correo.leido = false;
     correo.emisor = 'correoEmisor1@openWebinar.inv';
 
     this.onReset();
-    this.servicioAvisos.showMenssage(`Correo enviado a ${correo.emisor}`);
+    this.servicioAvisos.showMenssage('Correo enviado a ${correo.emisor}');
   }
 
   onReset() {
@@ -54,9 +54,9 @@ export class NuevoCorreoComponent implements OnInit {
     this.accionRealizada.emit();
   }
 
-  cancel(){
+  cancel() {
     this.onReset();
-    this.servicioAvisos.showMenssage("Envio Cancelado");
+    this.servicioAvisos.showMenssage('Envio Cancelado');
   }
 
 }

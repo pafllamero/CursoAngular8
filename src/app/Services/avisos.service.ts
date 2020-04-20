@@ -13,18 +13,18 @@ export class AvisosService {
     this.visible = false;
   }
 
-  showMenssage(mensaje: string){
+  showMenssage(mensaje: string) {
     this.mensaje = mensaje;
     this.visible = true;
     this.waitToHide();
   }
 
-  hideMenssage(){
+  hideMenssage() {
     this.visible = false;
     this.mensaje = '';
   }
 
-  waitToHide(){
+  waitToHide() {
     setTimeout(() => {
       this.hideMenssage();
     }, 2000);
