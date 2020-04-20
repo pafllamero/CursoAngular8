@@ -1,34 +1,34 @@
-import { Injectable, NgZone } from "@angular/core";
-import * as _ from "lodash";
-import { GoogleAuthService } from "ng-gapi/lib/GoogleAuthService";
+import { Injectable, NgZone } from '@angular/core';
+import * as _ from 'lodash';
+import { GoogleAuthService } from 'ng-gapi/lib/GoogleAuthService';
 import GoogleUser = gapi.auth2.GoogleUser;
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  public static readonly SESSION_STORAGE_KEY: string = "usuarioGoogle";
+  public static readonly SESSION_STORAGE_KEY: string = 'usuarioGoogle';
 
   profile: any = undefined;
   tokenUser: string;
   userId: string;
 
-  constructor(private googleAuthService: GoogleAuthService, private ngZone: NgZone) { 
-    if(this.isUserSignedIn()){
+  constructor(private googleAuthService: GoogleAuthService, private ngZone: NgZone) {
+    if (this.isUserSignedIn()) {
       this.setUser(this.getSessionUser());
     }
   }
 
-  private setUser(user: any){
-    this.profile = user['w3'];
-    this.tokenUser = user['Zi'].access_token;
-    this.userId = this.profile['Eea'];
+  private setUser(user: any) {
+    this.profile = user.w3;
+    this.tokenUser = user.Zi.access_token;
+    this.userId = this.profile.Eea;
   }
 
   public getSessionUser(): GoogleUser {
-    let user: string = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
+    const user: string = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
     if (!user) {
-      throw new Error("no token set , authentication required");
+      throw new Error('no token set , authentication required');
     }
     return JSON.parse(user);
   }
@@ -71,4 +71,4 @@ export class LoginService {
   private signInErrorHandler(err) {
     console.warn(err);
   }
-} 
+}
